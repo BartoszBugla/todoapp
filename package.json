@@ -9,8 +9,7 @@
     "scripts": {
         "dev": "node server",
         "build": "next build",
-        "start": "node server",
-        "export": "next export"
+        "start": "next start"
     },
     "keywords": [],
     "author": "",
