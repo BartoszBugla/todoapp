@@ -38,11 +38,11 @@ nextApp
             else if (pathname === "b") app.render(req, res, "a", query);
             else handle(req, res, parsedUrl);
         });
-        server.get("/", (req, res) => {
+        app.get("/", (req, res) => {
             return app.render(req, res, "/", req.query);
         });
 
-        server.get("/dashboard", (req, res) => {
+        app.get("/dashboard", (req, res) => {
             return app.render(req, res, "/dashboard", req.query);
         });
         const app = express();
