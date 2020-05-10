@@ -7,6 +7,13 @@ module.exports = {
             "mongodb+srv://Admin:Admin@learning-zc5e1.mongodb.net/test?retryWrites=true&w=majority",
         jwtsecret: "sl_myJwtSecret",
     },
+    exportPathMap: function () {
+        return {
+            "/": { page: "/" },
+            "/register": { page: "/register" },
+            "/dashboard": { page: "/dashboard" },
+        };
+    },
     webpack(config) {
         config.module.rules.push({
             test: /\.svg$/,

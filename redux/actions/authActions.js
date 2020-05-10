@@ -17,7 +17,7 @@ export const loadUser = (token) => (dispatch) => {
 
     dispatch({ type: USER_LOADING });
     axios
-        .post("http://localhost:5000/users", {}, tokenConfig(token))
+        .post("/users", {}, tokenConfig(token))
         .then((res) => {
             dispatch({
                 type: USER_LOADED,
@@ -39,7 +39,7 @@ export const register = (items) => (dispatch) => {
     const body = JSON.stringify(items);
 
     axios
-        .post("http://localhost:5000/users/register", body, config)
+        .post("/users/register", body, config)
         .then((res) =>
             dispatch({
                 type: REGISTER_SUCCESS,
@@ -66,7 +66,7 @@ export const login = (payload) => (dispatch) => {
     const body = JSON.stringify(payload);
 
     axios
-        .post("http://localhost:5000/users/login", body, config)
+        .post("/users/login", body, config)
         .then((res) => {
             dispatch({
                 type: LOGIN_SUCCESS,

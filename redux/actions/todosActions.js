@@ -3,7 +3,7 @@ import axios from "axios";
 export const loadTodos = (userID, token) => (dispatch) => {
     // Todos loading
     axios
-        .post(`http://localhost:5000/todos`, { userID }, tokenConfig(token))
+        .post(`/todos`, { userID }, tokenConfig(token))
         .then((res) => {
             dispatch({ type: TODOS_LOADED, payload: res.data });
         })
@@ -13,7 +13,7 @@ export const loadTodos = (userID, token) => (dispatch) => {
 };
 export const addTodo = (body, token) => (dispatch) => {
     axios
-        .post(`http://localhost:5000/todos/add`, body, tokenConfig(token))
+        .post(`/todos/add`, body, tokenConfig(token))
         .then((res) => {
             dispatch({ type: TODO_ADDED, payload: res.data });
         })
@@ -23,7 +23,7 @@ export const addTodo = (body, token) => (dispatch) => {
 };
 export const deleteTodo = (id) => (dispatch) => {
     axios
-        .delete(`http://localhost:5000/todos/${id}`)
+        .delete(`/todos/${id}`)
         .then((res) => {
             dispatch({ type: TODO_DELETED, payload: id });
         })
@@ -33,7 +33,7 @@ export const deleteTodo = (id) => (dispatch) => {
 };
 export const editTodo = (id, body) => (dispatch) => {
     axios
-        .patch(`http://localhost:5000/todos/${id}`, body)
+        .patch(`/todos/${id}`, body)
         .then((res) => {
             dispatch({ type: TODO_EDITED, payload: body, id });
         })
@@ -41,7 +41,7 @@ export const editTodo = (id, body) => (dispatch) => {
 };
 export const checkTodo = (id, body) => (dispatch) => {
     axios
-        .patch(`http://localhost:5000/todos/check/${id}`, body)
+        .patch(`/todos/check/${id}`, body)
         .then((res) => {
             dispatch({ type: TODO_EDITED, payload: body, id });
         })

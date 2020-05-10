@@ -93,6 +93,17 @@ module.exports =
 /************************************************************************/
 /******/ ({
 
+/***/ "../next-server/lib/utils":
+/*!*****************************************************!*\
+  !*** external "next/dist/next-server/lib/utils.js" ***!
+  \*****************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = require("next/dist/next-server/lib/utils.js");
+
+/***/ }),
+
 /***/ "./components/userProvider.js":
 /*!************************************!*\
   !*** ./components/userProvider.js ***!
@@ -161,141 +172,6 @@ module.exports = __webpack_require__(/*! ./dist/pages/_app */ "./node_modules/ne
 
 /***/ }),
 
-/***/ "./node_modules/next/dist/next-server/lib/utils.js":
-/*!*********************************************************!*\
-  !*** ./node_modules/next/dist/next-server/lib/utils.js ***!
-  \*********************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-const url_1 = __webpack_require__(/*! url */ "url");
-/**
- * Utils
- */
-
-
-function execOnce(fn) {
-  let used = false;
-  let result = null;
-  return (...args) => {
-    if (!used) {
-      used = true;
-      result = fn.apply(this, args);
-    }
-
-    return result;
-  };
-}
-
-exports.execOnce = execOnce;
-
-function getLocationOrigin() {
-  const {
-    protocol,
-    hostname,
-    port
-  } = window.location;
-  return `${protocol}//${hostname}${port ? ':' + port : ''}`;
-}
-
-exports.getLocationOrigin = getLocationOrigin;
-
-function getURL() {
-  const {
-    href
-  } = window.location;
-  const origin = getLocationOrigin();
-  return href.substring(origin.length);
-}
-
-exports.getURL = getURL;
-
-function getDisplayName(Component) {
-  return typeof Component === 'string' ? Component : Component.displayName || Component.name || 'Unknown';
-}
-
-exports.getDisplayName = getDisplayName;
-
-function isResSent(res) {
-  return res.finished || res.headersSent;
-}
-
-exports.isResSent = isResSent;
-
-async function loadGetInitialProps(App, ctx) {
-  var _a;
-
-  if (true) {
-    if ((_a = App.prototype) === null || _a === void 0 ? void 0 : _a.getInitialProps) {
-      const message = `"${getDisplayName(App)}.getInitialProps()" is defined as an instance method - visit https://err.sh/zeit/next.js/get-initial-props-as-an-instance-method for more information.`;
-      throw new Error(message);
-    }
-  } // when called from _app `ctx` is nested in `ctx`
-
-
-  const res = ctx.res || ctx.ctx && ctx.ctx.res;
-
-  if (!App.getInitialProps) {
-    if (ctx.ctx && ctx.Component) {
-      // @ts-ignore pageProps default
-      return {
-        pageProps: await loadGetInitialProps(ctx.Component, ctx.ctx)
-      };
-    }
-
-    return {};
-  }
-
-  const props = await App.getInitialProps(ctx);
-
-  if (res && isResSent(res)) {
-    return props;
-  }
-
-  if (!props) {
-    const message = `"${getDisplayName(App)}.getInitialProps()" should resolve to an object. But found "${props}" instead.`;
-    throw new Error(message);
-  }
-
-  if (true) {
-    if (Object.keys(props).length === 0 && !ctx.ctx) {
-      console.warn(`${getDisplayName(App)} returned an empty object from \`getInitialProps\`. This de-optimizes and prevents automatic static optimization. https://err.sh/zeit/next.js/empty-object-getInitialProps`);
-    }
-  }
-
-  return props;
-}
-
-exports.loadGetInitialProps = loadGetInitialProps;
-exports.urlObjectKeys = ['auth', 'hash', 'host', 'hostname', 'href', 'path', 'pathname', 'port', 'protocol', 'query', 'search', 'slashes'];
-
-function formatWithValidation(url, options) {
-  if (true) {
-    if (url !== null && typeof url === 'object') {
-      Object.keys(url).forEach(key => {
-        if (exports.urlObjectKeys.indexOf(key) === -1) {
-          console.warn(`Unknown key passed via urlObject into url.format: ${key}`);
-        }
-      });
-    }
-  }
-
-  return url_1.format(url, options);
-}
-
-exports.formatWithValidation = formatWithValidation;
-exports.SP = typeof performance !== 'undefined';
-exports.ST = exports.SP && typeof performance.mark === 'function' && typeof performance.measure === 'function';
-
-/***/ }),
-
 /***/ "./node_modules/next/dist/pages/_app.js":
 /*!**********************************************!*\
   !*** ./node_modules/next/dist/pages/_app.js ***!
@@ -315,7 +191,7 @@ exports.default = void 0;
 
 var _react = _interopRequireDefault(__webpack_require__(/*! react */ "react"));
 
-var _utils = __webpack_require__(/*! ../next-server/lib/utils */ "./node_modules/next/dist/next-server/lib/utils.js");
+var _utils = __webpack_require__(/*! ../next-server/lib/utils */ "../next-server/lib/utils");
 
 exports.AppInitialProps = _utils.AppInitialProps;
 /**
@@ -455,11 +331,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _styles_css__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../styles.css */ "./styles.css");
 /* harmony import */ var _styles_css__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(_styles_css__WEBPACK_IMPORTED_MODULE_6__);
 /* harmony import */ var _components_userProvider__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../components/userProvider */ "./components/userProvider.js");
-var _jsxFileName = "C:\\Users\\Bartosz\\Desktop\\TodoApp\\pages\\_app.jsx";
 var __jsx = react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement;
-
-function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
-
 
 
 
@@ -490,29 +362,10 @@ const MyApp = ({
   };
 
   return __jsx(react_redux__WEBPACK_IMPORTED_MODULE_1__["Provider"], {
-    store: store,
-    __self: undefined,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 20,
-      columnNumber: 9
-    }
+    store: store
   }, __jsx(_components_userProvider__WEBPACK_IMPORTED_MODULE_7__["default"], {
-    token: token,
-    __self: undefined,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 21,
-      columnNumber: 13
-    }
-  }, __jsx(Component, _extends({}, pageProps, {
-    __self: undefined,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 22,
-      columnNumber: 17
-    }
-  }))));
+    token: token
+  }, __jsx(Component, pageProps)));
 }; //makeStore function that returns a new store for every request
 
 
@@ -550,7 +403,7 @@ const loadUser = token => dispatch => {
   dispatch({
     type: _types__WEBPACK_IMPORTED_MODULE_1__["USER_LOADING"]
   });
-  axios__WEBPACK_IMPORTED_MODULE_0___default.a.post("http://localhost:5000/users", {}, tokenConfig(token)).then(res => {
+  axios__WEBPACK_IMPORTED_MODULE_0___default.a.post("/users", {}, tokenConfig(token)).then(res => {
     dispatch({
       type: _types__WEBPACK_IMPORTED_MODULE_1__["USER_LOADED"],
       payload: res.data,
@@ -568,7 +421,7 @@ const register = items => dispatch => {
   //always check it out
 
   const body = JSON.stringify(items);
-  axios__WEBPACK_IMPORTED_MODULE_0___default.a.post("http://localhost:5000/users/register", body, config).then(res => dispatch({
+  axios__WEBPACK_IMPORTED_MODULE_0___default.a.post("/users/register", body, config).then(res => dispatch({
     type: _types__WEBPACK_IMPORTED_MODULE_1__["REGISTER_SUCCESS"],
     payload: res.data
   })).catch(err => {
@@ -588,7 +441,7 @@ const login = payload => dispatch => {
   }; // Request body
 
   const body = JSON.stringify(payload);
-  axios__WEBPACK_IMPORTED_MODULE_0___default.a.post("http://localhost:5000/users/login", body, config).then(res => {
+  axios__WEBPACK_IMPORTED_MODULE_0___default.a.post("/users/login", body, config).then(res => {
     dispatch({
       type: _types__WEBPACK_IMPORTED_MODULE_1__["LOGIN_SUCCESS"],
       payload: res.data
@@ -677,7 +530,7 @@ __webpack_require__.r(__webpack_exports__);
 
 const loadTodos = (userID, token) => dispatch => {
   // Todos loading
-  axios__WEBPACK_IMPORTED_MODULE_1___default.a.post(`http://localhost:5000/todos`, {
+  axios__WEBPACK_IMPORTED_MODULE_1___default.a.post(`/todos`, {
     userID
   }, tokenConfig(token)).then(res => {
     dispatch({
@@ -689,7 +542,7 @@ const loadTodos = (userID, token) => dispatch => {
   });
 };
 const addTodo = (body, token) => dispatch => {
-  axios__WEBPACK_IMPORTED_MODULE_1___default.a.post(`http://localhost:5000/todos/add`, body, tokenConfig(token)).then(res => {
+  axios__WEBPACK_IMPORTED_MODULE_1___default.a.post(`/todos/add`, body, tokenConfig(token)).then(res => {
     dispatch({
       type: _actions_types__WEBPACK_IMPORTED_MODULE_0__["TODO_ADDED"],
       payload: res.data
@@ -699,7 +552,7 @@ const addTodo = (body, token) => dispatch => {
   });
 };
 const deleteTodo = id => dispatch => {
-  axios__WEBPACK_IMPORTED_MODULE_1___default.a.delete(`http://localhost:5000/todos/${id}`).then(res => {
+  axios__WEBPACK_IMPORTED_MODULE_1___default.a.delete(`/todos/${id}`).then(res => {
     dispatch({
       type: _actions_types__WEBPACK_IMPORTED_MODULE_0__["TODO_DELETED"],
       payload: id
@@ -709,7 +562,7 @@ const deleteTodo = id => dispatch => {
   });
 };
 const editTodo = (id, body) => dispatch => {
-  axios__WEBPACK_IMPORTED_MODULE_1___default.a.patch(`http://localhost:5000/todos/${id}`, body).then(res => {
+  axios__WEBPACK_IMPORTED_MODULE_1___default.a.patch(`/todos/${id}`, body).then(res => {
     dispatch({
       type: _actions_types__WEBPACK_IMPORTED_MODULE_0__["TODO_EDITED"],
       payload: body,
@@ -718,7 +571,7 @@ const editTodo = (id, body) => dispatch => {
   }).catch(err => {});
 };
 const checkTodo = (id, body) => dispatch => {
-  axios__WEBPACK_IMPORTED_MODULE_1___default.a.patch(`http://localhost:5000/todos/check/${id}`, body).then(res => {
+  axios__WEBPACK_IMPORTED_MODULE_1___default.a.patch(`/todos/check/${id}`, body).then(res => {
     dispatch({
       type: _actions_types__WEBPACK_IMPORTED_MODULE_0__["TODO_EDITED"],
       payload: body,
@@ -1193,17 +1046,6 @@ module.exports = require("redux-devtools-extension");
 /***/ (function(module, exports) {
 
 module.exports = require("redux-thunk");
-
-/***/ }),
-
-/***/ "url":
-/*!**********************!*\
-  !*** external "url" ***!
-  \**********************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = require("url");
 
 /***/ })
 

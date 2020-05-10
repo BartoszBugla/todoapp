@@ -26,21 +26,27 @@ const connection = mongoose.connection;
 connection.once("open", () => {
     console.log("MongoDB database connection established succesfully ");
 });
-nextApp.prepare().then(() => {
-    const app = express();
+nextApp
+    .prepare()
+    .then(() => {
+        const app = express();
+        app.use(express.static("client"));
+        app.use(cors());
+        app.use(bodyParser.json());
+        app.use(bodyParser.urlencoded({ extended: true }));
 
-    app.use(cors());
-    app.use(bodyParser.json());
-    app.use(bodyParser.urlencoded({ extended: true }));
+        app.get("*", (req, res) => {
+            return handle(req, res); // for all the react stuff
+        });
+        app.listen(PORT, (err) => {
+            if (err) throw err;
+            console.log(`ready at http://localhost:${PORT}`);
+        });
 
-    app.get("*", (req, res) => {
-        return handle(req, res); // for all the react stuff
+        app.use("/users", userRouter);
+        app.use("/todos", todosRouter);
+    })
+    .catch((ex) => {
+        console.error(ex.stack);
+        process.exit(1);
     });
-    app.listen(PORT, (err) => {
-        if (err) throw err;
-        console.log(`ready at http://localhost:${PORT}`);
-    });
-
-    app.use("/users", userRouter);
-    app.use("/todos", todosRouter);
-});
