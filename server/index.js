@@ -38,6 +38,13 @@ nextApp
             else if (pathname === "b") app.render(req, res, "a", query);
             else handle(req, res, parsedUrl);
         });
+        server.get("/", (req, res) => {
+            return app.render(req, res, "/", req.query);
+        });
+
+        server.get("/dashboard", (req, res) => {
+            return app.render(req, res, "/dashboard", req.query);
+        });
         const app = express();
         app.use(express.static("client"));
         app.use(cors());
