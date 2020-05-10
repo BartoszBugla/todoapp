@@ -4,7 +4,7 @@ const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const cors = require("cors");
 
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 3000;
 const dev = process.env.NODE_DEV !== "production"; //true false
 
 const nextApp = next({ dev });
