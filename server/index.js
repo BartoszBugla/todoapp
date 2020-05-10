@@ -31,6 +31,7 @@ connection.once("open", () => {
 nextApp
     .prepare()
     .then(() => {
+        const app = express();
         createServer((req, res) => {
             const parsedUrl = parse(req.url, true);
             const { pathname, query } = parsedUrl;
@@ -45,7 +46,7 @@ nextApp
         app.get("/dashboard", (req, res) => {
             return app.render(req, res, "/dashboard", req.query);
         });
-        const app = express();
+
         app.use(express.static("client"));
         app.use(cors());
         app.use(bodyParser.json());
