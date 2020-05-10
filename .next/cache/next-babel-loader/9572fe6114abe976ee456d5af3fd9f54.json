@@ -1,0 +1,1 @@
+{"ast":null,"code":"import { GET_ERRORS, CLOSE_ERRORS } from \"./types\"; // RETURN ERRORS\n\nexport const returnErrors = msg => {\n  return {\n    type: GET_ERRORS,\n    payload: msg\n  };\n}; // CLEAR ERRORS\n\nexport const clearErrors = () => dispatch => {\n  dispatch({\n    type: CLOSE_ERRORS\n  });\n};","map":null,"metadata":{},"sourceType":"module"}

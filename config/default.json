@@ -1,0 +1,4 @@
+{
+    "mongoURI": "mongodb+srv://Admin:Admin@learning-zc5e1.mongodb.net/test?retryWrites=true&w=majority",
+    "jwtsecret": "sl_myJwtSecret"
+}
