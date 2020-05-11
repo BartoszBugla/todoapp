@@ -9,8 +9,8 @@
     "scripts": {
         "dev": "node server",
         "build": "next build",
-        "start": "node server",
-        "heroku-postbuild": "npm run build && next export "
+        "start": "NODE_ENV=production node server",
+        "heroku-postbuild": "npm run build"
     },
     "keywords": [],
     "author": "",
@@ -43,12 +43,12 @@
         "redux": "^4.0.5",
         "redux-devtools-extension": "^2.13.8",
         "redux-thunk": "^2.3.0",
-        "styled-components": "^5.1.0"
+        "styled-components": "^5.1.0",
+        "babel-plugin-inline-react-svg": "^1.1.1"
     },
     "devDependencies": {
         "@babel/core": "^7.9.6",
         "@babel/preset-env": "^7.9.6",
-        "@babel/register": "^7.9.0",
-        "babel-plugin-inline-react-svg": "^1.1.1"
+        "@babel/register": "^7.9.0"
     }
 }
