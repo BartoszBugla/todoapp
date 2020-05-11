@@ -47,7 +47,7 @@ nextApp
             return app.render(req, res, "/dashboard", req.query);
         });
 
-        app.use(express.static("client"));
+        app.use(express.static("out"));
         app.use(cors());
         app.use(bodyParser.json());
         app.use(bodyParser.urlencoded({ extended: true }));
